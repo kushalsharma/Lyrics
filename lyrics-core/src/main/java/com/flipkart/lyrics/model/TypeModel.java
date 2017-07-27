@@ -25,7 +25,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.*;
 
 /**
- * Created by shrey.garg on 25/11/16.
+ * @author shrey.garg on 25/11/16.
  */
 public class TypeModel {
     private Type type;

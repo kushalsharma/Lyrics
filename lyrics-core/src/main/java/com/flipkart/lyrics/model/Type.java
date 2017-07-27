@@ -17,12 +17,12 @@
 package com.flipkart.lyrics.model;
 
 /**
- * Created by shrey.garg on 25/11/16.
+ * @author shrey.garg on 25/11/16.
  */
 public enum Type {
     CLASS,
     ENUM,
     ENUM_WITH_FIELDS,
     ANNOTATION,
-    INTERFACE;
+    INTERFACE
 }

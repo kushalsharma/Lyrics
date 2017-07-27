@@ -23,7 +23,7 @@ import com.flipkart.lyrics.rules.method.MethodRule;
 import com.flipkart.lyrics.rules.type.TypeRule;
 
 /**
- * Created by shrey.garg on 30/12/16.
+ * @author shrey.garg on 30/12/16.
  */
 public abstract class RuleSet {
 

@@ -16,14 +16,14 @@
 
 package com.flipkart.lyrics.processor.constructors;
 
+import com.flipkart.lyrics.builder.ParameterSpecBuilder;
+import com.flipkart.lyrics.builder.TypeSpecBuilder;
 import com.flipkart.lyrics.config.Tune;
 import com.flipkart.lyrics.model.FieldModel;
 import com.flipkart.lyrics.model.MetaInfo;
-import com.squareup.javapoet.ParameterSpec;
-import com.squareup.javapoet.TypeSpec;
 
 /**
- * Created by shrey.garg on 03/02/17.
+ * @author shrey.garg on 03/02/17.
  */
 public abstract class ParameterTypeHandler {
 
@@ -35,5 +35,5 @@ public abstract class ParameterTypeHandler {
         this.metaInfo = metaInfo;
     }
 
-    public abstract ParameterSpec.Builder process(TypeSpec.Builder typeSpec, String key, FieldModel fieldModel);
+    public abstract ParameterSpecBuilder process(TypeSpecBuilder typeSpec, String key, FieldModel fieldModel);
 }

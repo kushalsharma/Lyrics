@@ -19,7 +19,7 @@ package com.flipkart.lyrics.model;
 import java.util.List;
 
 /**
- * Created by shrey.garg on 03/12/16.
+ * @author shrey.garg on 03/12/16.
  */
 public class MethodModel {
     private FieldModel returnType;

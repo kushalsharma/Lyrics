@@ -16,13 +16,13 @@
 
 package com.flipkart.lyrics.rules;
 
+import com.flipkart.lyrics.builder.FieldSpecBuilder;
 import com.flipkart.lyrics.config.Tune;
 import com.flipkart.lyrics.model.FieldModel;
 import com.flipkart.lyrics.model.MetaInfo;
-import com.squareup.javapoet.FieldSpec;
 
 /**
- * Created by shrey.garg on 26/11/16.
+ * @author shrey.garg on 26/11/16.
  */
 public abstract class FieldRule {
 
@@ -34,5 +34,5 @@ public abstract class FieldRule {
         this.metaInfo = metaInfo;
     }
 
-    public abstract void process(FieldSpec.Builder fieldSpec, FieldModel fieldModel);
+    public abstract void process(FieldSpecBuilder fieldSpec, FieldModel fieldModel);
 }

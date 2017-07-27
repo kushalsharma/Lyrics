@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by shrey.garg on 25/11/16.
+ * @author shrey.garg on 25/11/16.
  */
 public class GenericVariableModel {
     private String name;

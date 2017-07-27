@@ -19,7 +19,7 @@ package com.flipkart.lyrics.model;
 import java.util.Map;
 
 /**
- * Created by shrey.garg on 25/11/16.
+ * @author shrey.garg on 25/11/16.
  */
 public class AnnotationModel {
     private String className;

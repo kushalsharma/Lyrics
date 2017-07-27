@@ -17,7 +17,7 @@
 package com.flipkart.lyrics.model;
 
 /**
- * Created by shrey.garg on 24/01/17.
+ * @author shrey.garg on 24/01/17.
  */
 public class FieldModelOrdered extends FieldModel {
     private String name;

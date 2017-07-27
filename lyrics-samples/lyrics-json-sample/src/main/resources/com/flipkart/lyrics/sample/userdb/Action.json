@@ -1,0 +1,84 @@
+{
+  "type": "CLASS",
+  "fields": {
+    "screenType": {
+      "fieldType": "STRING"
+    },
+    "type": {
+      "fieldType": "STRING",
+      "initializeWith": {
+        "value": "NAVIGATION"
+      },
+      "required": true
+
+    },
+    "omnitureData": {
+      "fieldType": "STRING"
+    },
+    "originalUrl": {
+      "fieldType": "STRING"
+    },
+    "url": {
+      "fieldType": "STRING"
+    },
+    "params": {
+      "fieldType": "OBJECT",
+      "type": {
+        "type": "java.util.Map",
+        "types": [
+          {
+            "type": "java.lang.String"
+          },
+          {
+            "type": "java.lang.Object"
+          }
+        ]
+      },
+      "initializeWith": {
+        "newInstanceOf": "java.util.HashMap",
+        "inferGenerics": true
+      },
+      "required": true
+
+    },
+    "tracking": {
+      "fieldType": "OBJECT",
+      "type": {
+        "type": "java.util.Map",
+        "types": [
+          {
+            "type": "java.lang.String"
+          },
+          {
+            "type": "java.lang.String"
+          }
+        ]
+      },
+      "initializeWith": {
+        "newInstanceOf": "java.util.HashMap",
+        "inferGenerics": true
+      },
+      "required": true
+
+    },
+    "fallback": {
+      "fieldType": "OBJECT",
+      "type": {
+        "type": "com.flipkart.lyrics.sample.userdb.Action"
+      },
+      "required": false
+    },
+    "loginType": {
+      "fieldType": "ENUM",
+      "type": {
+        "type": "com.flipkart.lyrics.sample.userdb.LoginType"
+      },
+      "initializeWith": {
+        "value": "LOGIN_NOT_REQUIRED",
+        "fromType": "com.flipkart.lyrics.sample.userdb.LoginType"
+      },
+      "required": true
+
+    }
+  }
+}

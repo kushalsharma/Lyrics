@@ -1,0 +1,8 @@
+{
+  "values": [
+    "LEGACY_LOGIN",
+    "CHECKOUT_LOGIN",
+    "LOGIN_NOT_REQUIRED"
+  ],
+  "type": "ENUM"
+}

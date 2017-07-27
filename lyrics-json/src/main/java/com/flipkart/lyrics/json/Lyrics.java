@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 /**
- * Created by shrey.garg on 25/12/16.
+ * @author shrey.garg on 25/12/16.
  */
 public final class Lyrics {
 
@@ -77,5 +77,4 @@ public final class Lyrics {
         }
         file.delete();
     }
-
 }

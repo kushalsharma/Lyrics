@@ -17,7 +17,7 @@
 package com.flipkart.lyrics.model;
 
 /**
- * Created by shrey.garg on 26/11/16.
+ * @author shrey.garg on 26/11/16.
  */
 public enum InclusionType {
     ALWAYS,
