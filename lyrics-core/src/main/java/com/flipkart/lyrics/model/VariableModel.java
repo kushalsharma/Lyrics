@@ -19,7 +19,7 @@ package com.flipkart.lyrics.model;
 import java.util.Arrays;
 
 /**
- * Created by shrey.garg on 28/11/16.
+ * @author shrey.garg on 28/11/16.
  */
 public class VariableModel {
     private String type;
@@ -52,8 +52,7 @@ public class VariableModel {
 
         VariableModel that = (VariableModel) o;
 
-        if (type != null ? !type.equals(that.type) : that.type != null) return false;
-        return Arrays.equals(types, that.types);
+        return (type != null ? type.equals(that.type) : that.type == null) && Arrays.equals(types, that.types);
     }
 
     @Override

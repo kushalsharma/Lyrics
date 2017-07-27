@@ -16,17 +16,14 @@
 
 package com.flipkart.lyrics.processor;
 
+import com.flipkart.lyrics.builder.TypeSpecBuilder;
 import com.flipkart.lyrics.config.Tune;
 import com.flipkart.lyrics.model.MetaInfo;
 import com.flipkart.lyrics.model.TypeModel;
 import com.flipkart.lyrics.sets.RuleSet;
-import com.squareup.javapoet.TypeSpec;
-import com.squareup.javapoet.TypeVariableName;
-
-import java.util.Map;
 
 /**
- * Created by shrey.garg on 31/12/16.
+ * @author shrey.garg on 31/12/16.
  */
 public abstract class Handler {
 
@@ -40,5 +37,5 @@ public abstract class Handler {
         this.ruleSet = ruleSet;
     }
 
-    public abstract void process(TypeSpec.Builder typeSpec, TypeModel typeModel);
+    public abstract void process(TypeSpecBuilder typeSpec, TypeModel typeModel);
 }

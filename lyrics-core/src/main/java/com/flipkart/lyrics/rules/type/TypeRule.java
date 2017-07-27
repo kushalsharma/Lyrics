@@ -16,13 +16,13 @@
 
 package com.flipkart.lyrics.rules.type;
 
+import com.flipkart.lyrics.builder.TypeSpecBuilder;
 import com.flipkart.lyrics.config.Tune;
 import com.flipkart.lyrics.model.MetaInfo;
 import com.flipkart.lyrics.model.TypeModel;
-import com.squareup.javapoet.TypeSpec;
 
 /**
- * Created by shrey.garg on 30/12/16.
+ * @author shrey.garg on 30/12/16.
  */
 public abstract class TypeRule {
     protected final Tune tune;
@@ -33,5 +33,5 @@ public abstract class TypeRule {
         this.metaInfo = metaInfo;
     }
 
-    public abstract void process(TypeSpec.Builder typeSpec, TypeModel typeModel);
+    public abstract void process(TypeSpecBuilder typeSpec, TypeModel typeModel);
 }

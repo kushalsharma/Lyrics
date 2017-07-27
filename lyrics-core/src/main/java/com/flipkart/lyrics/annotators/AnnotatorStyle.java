@@ -16,24 +16,23 @@
 
 package com.flipkart.lyrics.annotators;
 
+import com.flipkart.lyrics.builder.FieldSpecBuilder;
+import com.flipkart.lyrics.builder.TypeSpecBuilder;
 import com.flipkart.lyrics.model.FieldModel;
 import com.flipkart.lyrics.model.TypeModel;
-import com.squareup.javapoet.FieldSpec;
-import com.squareup.javapoet.TypeSpec;
 
 /**
  * Created by shrey.garg on 03/01/17.
  */
 public abstract class AnnotatorStyle {
 
-    public abstract void processNamedAsRule(FieldSpec.Builder fieldSpec, FieldModel fieldModel);
+    public abstract void processNamedAsRule(FieldSpecBuilder fieldSpec, FieldModel fieldModel);
 
-    public abstract void processInclusionRule(FieldSpec.Builder fieldSpec, FieldModel fieldModel);
+    public abstract void processInclusionRule(FieldSpecBuilder fieldSpec, FieldModel fieldModel);
 
-    public abstract void processGlobalInclusionRule(TypeSpec.Builder typeSpec, TypeModel typeModel);
+    public abstract void processGlobalInclusionRule(TypeSpecBuilder typeSpec, TypeModel typeModel);
 
-    public abstract void processSubTypeRule(TypeSpec.Builder typeSpec, TypeModel typeModel);
+    public abstract void processSubTypeRule(TypeSpecBuilder typeSpec, TypeModel typeModel);
 
-    public abstract void processPropertyOrderRule(TypeSpec.Builder typeSpec, TypeModel typeModel);
-
+    public abstract void processPropertyOrderRule(TypeSpecBuilder typeSpec, TypeModel typeModel);
 }

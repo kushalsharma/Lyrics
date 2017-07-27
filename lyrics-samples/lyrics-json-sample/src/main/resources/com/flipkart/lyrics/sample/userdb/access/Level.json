@@ -1,8 +1,0 @@
-{
-  "type": "ENUM",
-  "values": [
-    "LOW",
-    "MEDIUM",
-    "HIGH"
-  ]
-}

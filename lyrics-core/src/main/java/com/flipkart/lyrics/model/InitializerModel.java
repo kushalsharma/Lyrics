@@ -18,7 +18,7 @@
 package com.flipkart.lyrics.model;
 
 /**
- * Created by shrey.garg on 31/01/17.
+ * @author shrey.garg on 31/01/17.
  */
 public class InitializerModel {
     private final String newInstanceOf;

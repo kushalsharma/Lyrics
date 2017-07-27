@@ -16,12 +16,12 @@
 
 package com.flipkart.lyrics.processor.fields;
 
+import com.flipkart.lyrics.builder.FieldSpecBuilder;
 import com.flipkart.lyrics.config.Tune;
 import com.flipkart.lyrics.model.MetaInfo;
-import com.squareup.javapoet.FieldSpec;
 
 /**
- * Created by shrey.garg on 13/05/17.
+ * @author shrey.garg on 13/05/17.
  */
 public abstract class FieldAdditionalHandler {
     protected Tune tune;
@@ -36,7 +36,7 @@ public abstract class FieldAdditionalHandler {
      * @param value The non-null value of the additional property.
      * @return False, if the field is not supposed to be added to the type. True, otherwise.
      */
-    public abstract boolean process(FieldSpec.Builder fieldBuilder, String key, Object value);
+    public abstract boolean process(FieldSpecBuilder fieldBuilder, String key, Object value);
 
     public final void setTune(Tune tune) {
         this.tune = tune;

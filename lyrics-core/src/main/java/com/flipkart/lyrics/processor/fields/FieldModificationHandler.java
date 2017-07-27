@@ -1,12 +1,12 @@
 package com.flipkart.lyrics.processor.fields;
 
+import com.flipkart.lyrics.builder.FieldSpecBuilder;
 import com.flipkart.lyrics.config.Tune;
 import com.flipkart.lyrics.model.FieldModel;
 import com.flipkart.lyrics.model.MetaInfo;
-import com.squareup.javapoet.FieldSpec;
 
 /**
- * Created by shrey.garg on 14/06/17.
+ * @author shrey.garg on 14/06/17.
  */
 public abstract class FieldModificationHandler {
     protected Tune tune;
@@ -22,7 +22,7 @@ public abstract class FieldModificationHandler {
      * @param fieldModel An immutable instance of FieldModel
      * @return The new FieldSpec.Builder that will replace the builder being processed
      */
-    public abstract FieldSpec.Builder process(FieldSpec.Builder fieldBuilder, String key, Object value, FieldModel fieldModel);
+    public abstract FieldSpecBuilder process(FieldSpecBuilder fieldBuilder, String key, Object value, FieldModel fieldModel);
 
     public final void setTune(Tune tune) {
         this.tune = tune;

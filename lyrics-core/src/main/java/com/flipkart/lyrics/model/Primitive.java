@@ -17,7 +17,7 @@
 package com.flipkart.lyrics.model;
 
 /**
- * Created by shrey.garg on 05/12/16.
+ * @author shrey.garg on 05/12/16.
  */
 public enum Primitive {
     BYTE(byte.class, Byte.class),

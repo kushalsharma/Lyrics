@@ -16,30 +16,30 @@
 
 package com.flipkart.lyrics.annotators.validations;
 
+import com.flipkart.lyrics.builder.FieldSpecBuilder;
+import com.flipkart.lyrics.builder.MethodSpecBuilder;
+import com.flipkart.lyrics.builder.ParameterSpecBuilder;
 import com.flipkart.lyrics.model.FieldModel;
-import com.squareup.javapoet.FieldSpec;
-import com.squareup.javapoet.MethodSpec;
-import com.squareup.javapoet.ParameterSpec;
 
 /**
  * Created by shrey.garg on 03/01/17.
  */
 public abstract class ValidationAnnotatorStyle {
 
-    public abstract void processRequiredRule(FieldSpec.Builder fieldSpec, FieldModel fieldModel);
+    public abstract void processRequiredRule(FieldSpecBuilder fieldSpec, FieldModel fieldModel);
 
-    public abstract void processRequiredRuleForGetters(MethodSpec.Builder methodSpec, FieldModel fieldModel);
+    public abstract void processRequiredRuleForGetters(MethodSpecBuilder methodSpec, FieldModel fieldModel);
 
-    public abstract void processRequiredRuleForSetters(MethodSpec.Builder methodSpec, FieldModel fieldModel, ParameterSpec.Builder param);
+    public abstract void processRequiredRuleForSetters(MethodSpecBuilder methodSpec, FieldModel fieldModel, ParameterSpecBuilder param);
 
-    public abstract void processNotRequiredRule(FieldSpec.Builder fieldSpec, FieldModel fieldModel);
+    public abstract void processNotRequiredRule(FieldSpecBuilder fieldSpec, FieldModel fieldModel);
 
-    public abstract void processNotRequiredRuleForGetters(MethodSpec.Builder methodSpec, FieldModel fieldModel);
+    public abstract void processNotRequiredRuleForGetters(MethodSpecBuilder methodSpec, FieldModel fieldModel);
 
-    public abstract void processNotRequiredRuleForSetters(MethodSpec.Builder methodSpec, FieldModel fieldModel, ParameterSpec.Builder param);
+    public abstract void processNotRequiredRuleForSetters(MethodSpecBuilder methodSpec, FieldModel fieldModel, ParameterSpecBuilder param);
 
-    public abstract void processRequiredRuleForConstructor(ParameterSpec.Builder parameterSpec);
+    public abstract void processRequiredRuleForConstructor(ParameterSpecBuilder parameterSpec);
 
-    public abstract void processNotRequiredRuleForConstructor(ParameterSpec.Builder parameterSpec);
+    public abstract void processNotRequiredRuleForConstructor(ParameterSpecBuilder parameterSpec);
 
 }

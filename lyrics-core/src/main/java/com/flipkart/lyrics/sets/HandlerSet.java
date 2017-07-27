@@ -23,7 +23,7 @@ import com.flipkart.lyrics.processor.Handler;
 import javax.lang.model.element.Modifier;
 
 /**
- * Created by shrey.garg on 30/12/16.
+ * @author shrey.garg on 30/12/16.
  */
 public abstract class HandlerSet {
 
@@ -79,7 +79,7 @@ public abstract class HandlerSet {
     public abstract Handler getFieldsHandler();
 
     /**
-     * @return An {@link Handler} that adds the equals and hashcode methods to the under construction classes.
+     * @return An {@link Handler} that adds the equals and hashcode method to the under construction classes.
      */
     public abstract Handler getEqualsAndHashCodeHandler();
 
@@ -109,7 +109,7 @@ public abstract class HandlerSet {
     public abstract Handler getSpecialInterfacesHandler();
 
     /**
-     * @return An {@link Handler} that adds the specified methods to the under construction annotations.
+     * @return An {@link Handler} that adds the specified method to the under construction annotations.
      * Methods are provided by {@link TypeModel} as a map of String and {@link MethodModel}.
      */
     public abstract Handler getAnnotationMethodsHandler();
@@ -131,7 +131,7 @@ public abstract class HandlerSet {
     public abstract Handler getOrderedConstructorHandler();
 
     /**
-     * @return A {@link Handler} that adds methods to the under construction interfaces.
+     * @return A {@link Handler} that adds method to the under construction interfaces.
      */
     public abstract Handler getInterfaceMethodsHandler();
 

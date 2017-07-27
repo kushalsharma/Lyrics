@@ -16,14 +16,14 @@
 
 package com.flipkart.lyrics.processor.fields;
 
+import com.flipkart.lyrics.builder.FieldSpecBuilder;
+import com.flipkart.lyrics.builder.TypeSpecBuilder;
 import com.flipkart.lyrics.config.Tune;
 import com.flipkart.lyrics.model.FieldModel;
 import com.flipkart.lyrics.model.MetaInfo;
-import com.squareup.javapoet.FieldSpec;
-import com.squareup.javapoet.TypeSpec;
 
 /**
- * Created by shrey.garg on 25/11/16.
+ * @author shrey.garg on 25/11/16.
  */
 public abstract class FieldTypeHandler {
 
@@ -35,6 +35,5 @@ public abstract class FieldTypeHandler {
         this.metaInfo = metaInfo;
     }
 
-    public abstract FieldSpec.Builder process(TypeSpec.Builder typeSpec, String key, FieldModel fieldModel);
-
+    public abstract FieldSpecBuilder process(TypeSpecBuilder typeSpec, String key, FieldModel fieldModel);
 }

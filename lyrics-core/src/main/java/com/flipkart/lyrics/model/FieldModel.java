@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by shrey.garg on 25/11/16.
+ * @author shrey.garg on 25/11/16.
  */
 public class FieldModel {
     private String namedAs;
