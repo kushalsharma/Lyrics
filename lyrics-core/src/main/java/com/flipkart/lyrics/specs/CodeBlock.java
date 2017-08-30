@@ -37,15 +37,9 @@ public final class CodeBlock {
     final List<String> formatParts;
     final List<Object> args;
 
-    final public String format;
-    final public Object[] arguments;
-
     private CodeBlock(Builder builder) {
         this.formatParts = Util.immutableList(builder.formatParts);
         this.args = Util.immutableList(builder.args);
-
-        this.format = builder.format;
-        this.arguments = builder.arguments;
     }
 
     public boolean isEmpty() {
@@ -81,9 +75,6 @@ public final class CodeBlock {
     public static final class Builder {
         final List<String> formatParts = new ArrayList<>();
         final List<Object> args = new ArrayList<>();
-
-        public String format;
-        public Object[] arguments;
 
         private Builder() {
         }
@@ -157,9 +148,6 @@ public final class CodeBlock {
          * error.
          */
         public Builder add(String format, Object... args) {
-            this.format = format;
-            this.arguments = args;
-
             boolean hasRelative = false;
             boolean hasIndexed = false;
 

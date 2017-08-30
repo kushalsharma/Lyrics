@@ -26,11 +26,10 @@ public class MethodSpec {
     public final boolean varargs;
     public final List<TypeName> exceptions;
     public final CodeBlock defaultValue;
-    public final List<CodeBlock> codeBlocks = new ArrayList<>();
-    public final List<CodeBlock> comments = new ArrayList<>();
-    public final List<CodeBlock> statements = new ArrayList<>();
+    public final CodeBlock code;
 
     protected MethodSpec(Builder builder) {
+        CodeBlock code = builder.code.build();
         this.name = checkNotNull(builder.name, "name == null");
         this.doc = builder.doc.build();
         this.annotations = Util.immutableList(builder.annotations);
@@ -41,9 +40,7 @@ public class MethodSpec {
         this.varargs = builder.varargs;
         this.exceptions = Util.immutableList(builder.exceptions);
         this.defaultValue = builder.defaultValue;
-        this.codeBlocks.addAll(builder.codeBlocks);
-        this.comments.addAll(builder.comments);
-        this.statements.addAll(builder.statements);
+        this.code = code;
     }
 
     public boolean hasModifier(Modifier modifier) {
@@ -69,9 +66,7 @@ public class MethodSpec {
         builder.exceptions.addAll(exceptions);
         builder.varargs = varargs;
         builder.defaultValue = defaultValue;
-        builder.codeBlocks.addAll(codeBlocks);
-        builder.comments.addAll(comments);
-        builder.statements.addAll(statements);
+        builder.code.add(code);
         return builder;
     }
 
@@ -90,9 +85,7 @@ public class MethodSpec {
         private final Set<TypeName> exceptions = new LinkedHashSet<>();
         private boolean varargs;
         private CodeBlock defaultValue;
-        private final List<CodeBlock> codeBlocks = new ArrayList<>();
-        private final List<CodeBlock> comments = new ArrayList<>();
-        private final List<CodeBlock> statements = new ArrayList<>();
+        private final CodeBlock.Builder code = CodeBlock.builder();
 
         protected Builder(String name) {
             this.name = name;
@@ -143,18 +136,23 @@ public class MethodSpec {
             return this;
         }
 
-        public MethodSpec.Builder addCode(String format, Object... args) {
-            this.codeBlocks.add(CodeBlock.of(format, args));
+        public Builder addCode(String format, Object... args) {
+            code.add(format, args);
+            return this;
+        }
+
+        public Builder addComment(CodeBlock codeBlock) {
+            code.add(codeBlock);
             return this;
         }
 
         public MethodSpec.Builder addComment(String format, Object... args) {
-            this.comments.add(CodeBlock.of(format, args));
+            this.code.add("// " + format + "\n", args);
             return this;
         }
 
-        public MethodSpec.Builder addStatement(String format, Object... args) {
-            this.statements.add(CodeBlock.of(format, args));
+        public Builder addStatement(String format, Object... args) {
+            code.add("// " + format + "\n", args);
             return this;
         }
 

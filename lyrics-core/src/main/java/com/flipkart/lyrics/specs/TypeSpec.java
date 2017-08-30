@@ -16,7 +16,8 @@ import static com.flipkart.lyrics.helper.Util.*;
 public class TypeSpec {
     public final Kind kind;
     public final String name;
-    public final CodeBlock anonymousTypeArguments;
+    public final String anonymousTypeArgumentsFormat;
+    public final Object[] anonymousTypeArgumentsArgs;
     public final CodeBlock javadoc;
     public final List<AnnotationSpec> annotations;
     public final Set<Modifier> modifiers;
@@ -33,7 +34,8 @@ public class TypeSpec {
     public TypeSpec(Builder builder) {
         this.kind = builder.kind;
         this.name = builder.name;
-        this.anonymousTypeArguments = builder.anonymousTypeArguments;
+        this.anonymousTypeArgumentsFormat = builder.anonymousTypeArgumentsFormat;
+        this.anonymousTypeArgumentsArgs = builder.anonymousTypeArgumentsArgs;
         this.javadoc = builder.doc.build();
         this.annotations = Util.immutableList(builder.annotations);
         this.modifiers = Util.immutableSet(builder.modifiers);
@@ -73,7 +75,7 @@ public class TypeSpec {
     }
 
     public Builder toBuilder() {
-        Builder builder = new Builder(kind, name, anonymousTypeArguments);
+        Builder builder = new Builder(kind, name, anonymousTypeArgumentsFormat, anonymousTypeArgumentsArgs);
         builder.doc.add(javadoc);
         builder.annotations.addAll(annotations);
         builder.modifiers.addAll(modifiers);
@@ -96,7 +98,8 @@ public class TypeSpec {
     public static class Builder {
         private final Kind kind;
         private final String name;
-        private final CodeBlock anonymousTypeArguments;
+        private final String anonymousTypeArgumentsFormat;
+        private final Object[] anonymousTypeArgumentsArgs;
         private final CodeBlock.Builder doc = CodeBlock.builder();
         private final List<AnnotationSpec> annotations = new ArrayList<>();
         private final List<Modifier> modifiers = new ArrayList<>();
@@ -113,13 +116,15 @@ public class TypeSpec {
         public Builder(Kind kind, String name) {
             this.kind = kind;
             this.name = name;
-            this.anonymousTypeArguments = null;
+            this.anonymousTypeArgumentsFormat = null;
+            this.anonymousTypeArgumentsArgs = null;
         }
 
         private Builder(Kind kind, String typeArgumentsFormat, Object... args) {
             this.kind = kind;
             this.name = null;
-            this.anonymousTypeArguments = CodeBlock.of(typeArgumentsFormat, args);
+            this.anonymousTypeArgumentsFormat = typeArgumentsFormat;
+            this.anonymousTypeArgumentsArgs = args;
         }
 
         public Builder addDoc(String format, Object... args) {
@@ -154,7 +159,6 @@ public class TypeSpec {
         }
 
         public Builder addModifiers(Modifier... modifiers) {
-            checkState(anonymousTypeArguments == null, "forbidden on anonymous types.");
             for (Modifier modifier : modifiers) {
                 checkArgument(modifier != null, "modifiers contain null");
                 this.modifiers.add(modifier);
@@ -163,7 +167,6 @@ public class TypeSpec {
         }
 
         public Builder addTypeVariables(Iterable<TypeVariableName> typeVariables) {
-            checkState(anonymousTypeArguments == null, "forbidden on anonymous types.");
             checkArgument(typeVariables != null, "typeVariables == null");
             for (TypeVariableName typeVariable : typeVariables) {
                 this.typeVariables.add(typeVariable);
@@ -172,7 +175,6 @@ public class TypeSpec {
         }
 
         public Builder addTypeVariable(TypeVariableName typeVariable) {
-            checkState(anonymousTypeArguments == null, "forbidden on anonymous types.");
             typeVariables.add(typeVariable);
             return this;
         }
@@ -212,8 +214,6 @@ public class TypeSpec {
 
         public Builder addEnumConstant(String name, TypeSpec typeSpec) {
             checkState(kind == Kind.ENUM, "%s is not enum", this.name);
-            checkArgument(typeSpec.anonymousTypeArguments != null,
-                    "enum constants must have anonymous type arguments");
             checkArgument(SourceVersion.isName(name), "not a valid enum constant: %s", name);
             enumConstants.put(name, typeSpec);
             return this;

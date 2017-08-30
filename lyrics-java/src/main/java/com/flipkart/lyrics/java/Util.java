@@ -1,7 +1,11 @@
 package com.flipkart.lyrics.java;
 
 import com.flipkart.lyrics.specs.*;
+import org.apache.commons.lang3.reflect.FieldUtils;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -26,7 +30,7 @@ class Util {
                 builder = com.squareup.javapoet.TypeSpec.annotationBuilder(type.name);
                 break;
             case ANONYMOUS:
-                builder = com.squareup.javapoet.TypeSpec.anonymousClassBuilder(type.anonymousTypeArguments.format, type.anonymousTypeArguments.arguments);
+                builder = com.squareup.javapoet.TypeSpec.anonymousClassBuilder(type.anonymousTypeArgumentsFormat, type.anonymousTypeArgumentsArgs);
                 break;
             default:
                 builder = com.squareup.javapoet.TypeSpec.classBuilder(type.name);
@@ -79,22 +83,31 @@ class Util {
         for (AnnotationSpec annotation : methodSpec.annotations) {
             builder.addAnnotation(getAnnotationSpec(annotation));
         }
-        for (CodeBlock statement : methodSpec.statements) {
-            builder.addStatement(statement.format, statement.arguments);
-        }
-        for (CodeBlock code : methodSpec.codeBlocks) {
-            builder.addCode(code.format, code.arguments);
-        }
-        for (CodeBlock comment : methodSpec.comments) {
-            builder.addComment(comment.format, comment.arguments);
+        if (!methodSpec.code.isEmpty()) {
+           ;
+            builder.addCode(getJavaCodeBlock(methodSpec.code));
         }
         for (ParameterSpec parameter : methodSpec.parameters) {
             builder.addParameter(getParameterSpec(parameter));
         }
         if (methodSpec.defaultValue != null) {
-            builder.defaultValue(methodSpec.defaultValue.format, methodSpec.defaultValue.arguments);
+            builder.defaultValue(getJavaCodeBlock(methodSpec.defaultValue));
         }
         return builder.build();
+    }
+
+    private static com.squareup.javapoet.CodeBlock getJavaCodeBlock(CodeBlock code) {
+        try {
+            List<String> formatParts = (List<String>) FieldUtils.readField(code, "formatParts", true);
+            List<Object> args = (List<Object>) FieldUtils.readField(code, "args", true);
+            com.squareup.javapoet.CodeBlock.Builder codeBlockBuilder = com.squareup.javapoet.CodeBlock.builder();
+            FieldUtils.writeField(codeBlockBuilder, "formatParts", formatParts, true);
+            FieldUtils.writeField(codeBlockBuilder, "args", args, true);
+            return codeBlockBuilder.build();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return com.squareup.javapoet.CodeBlock.builder().build();
     }
 
     private static com.squareup.javapoet.ParameterSpec getParameterSpec(ParameterSpec parameter) {
@@ -112,17 +125,31 @@ class Util {
                 .builder(getJavaClassName(annotationSpec.type));
 
         for (String name : annotationSpec.members.keySet()) {
-            CodeBlock codeBlock = annotationSpec.members.get(name).get(0);
-            Object[] newArgs = new Object[codeBlock.arguments.length];
-            for (int i = 0; i < codeBlock.arguments.length; i++) {
-                if (codeBlock.arguments[i] instanceof ClassName) {
-                    ClassName className = (ClassName) codeBlock.arguments[i];
+            com.squareup.javapoet.CodeBlock codeBlock = getJavaCodeBlock(annotationSpec.members.get(name).get(0));
+            List<Object> args = new ArrayList<>();
+            try {
+                args.addAll((List<Object>) FieldUtils.readField(codeBlock, "args", true));
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+
+            Object[] newArgs = new Object[args.size()];
+            for (int i = 0; i < args.size(); i++) {
+                if (args.get(i) instanceof ClassName) {
+                    ClassName className = (ClassName) args.get(i);
                     newArgs[i] = getJavaClassName(className);
                 } else {
-                    newArgs[i] = codeBlock.arguments[i];
+                    newArgs[i] = args.get(i);
                 }
             }
-            builder.addMember(name, com.squareup.javapoet.CodeBlock.of(codeBlock.format, newArgs));
+
+            try {
+                FieldUtils.writeField(codeBlock, "args", newArgs, true);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+
+            builder.addMember(name, codeBlock);
         }
         return builder.build();
     }
@@ -131,8 +158,8 @@ class Util {
         com.squareup.javapoet.FieldSpec.Builder builder = com.squareup.javapoet.FieldSpec
                 .builder(getJavaTypeName(fieldSpec.type), fieldSpec.name, getJavaModifiers(fieldSpec.modifiers));
 
-        if (fieldSpec.initializer.format != null) {
-            builder.initializer(fieldSpec.initializer.format, fieldSpec.initializer.arguments);
+        if (!fieldSpec.initializer.isEmpty()) {
+            builder.initializer(getJavaCodeBlock(fieldSpec.initializer));
         }
         for (AnnotationSpec annotationSpec : fieldSpec.annotations) {
             builder.addAnnotation(getAnnotationSpec(annotationSpec));
